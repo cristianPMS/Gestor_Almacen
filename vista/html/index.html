@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Almacén</title>
+    <link rel="stylesheet" href="../css/index.css"> 
+</head>
+<body>
+    
+    <header>
+        <h1>Gestor de Almacén SYATEC</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/entrada">Registro de entrada</a></li>
+            <li><a href="/salida">Registro de salida</a></li>
+            <li><a href="/usuarios">Usuarios</a></li>
+            <li><a href="/trabajadores">Trabajadores</a></li>
+            <li><a href="/login">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
+    <!-- Botón agregado -->
+    <div class="button-container">
+        <button   onclick="window.location.href='/formularioIndex'"  class="btn-add">Agregar una nueva Herramienta o Material no registrado</button>
+    </div>
+
+    <main>
+        <section class="product-list">
+            <h2>Herramientas y Materiales en Inventario</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Identificador</th>
+                        <th>Cantidad</th>
+                        <th>Categoría</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
+    </main>
+
+</body>
+</html>

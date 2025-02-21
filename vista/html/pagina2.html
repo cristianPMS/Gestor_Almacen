@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Almacén</title>
+    <link rel="stylesheet" href="../css/registro.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Agregar Registro de Producto</h2>
+        <form action="/guardar_registro" method="POST">
+            <label for="nombre">Nombre del material o herramienta agregar</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="descripcion">Descripción</label>
+            <input type="text" id="descripcion" name="descripcion" required>
+
+            <label for="cantidad">Cantidad</label>
+            <input type="number" id="cantidad" name="cantidad" required>
+
+            <label for="precio"></label>
+            <input type="number" id="precio" name="precio" required>
+
+            <label for="categoria">Categoría</label>
+            <select id="categoria" name="categoria" required>
+                <option value="">Seleccione una categoría</option>
+                <option value="electronica">Electrónica</option>
+                <option value="ropa">Ropa</option>
+                <option value="muebles">Muebles</option>
+                <option value="herramientas">Herramientas</option>
+            </select>
+
+            <button type="submit">Registrar Producto</button>
+        </form>
+    </div>
+
+</body>
+</html>

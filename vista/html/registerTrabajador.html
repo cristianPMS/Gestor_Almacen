@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario</title>
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+
+    <header>
+        <h1>Dar de alta un trabajador</h1>
+    </header>
+
+    <div class="form-container">
+        <h2>Registro</h2>
+        <form action="#" method="POST">
+            <div class="input-group">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="input-group">
+                <label for="username">Area</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <button  onclick="window.location.href='/trabajadores'"  type="submit" class="submit-btn">Registrar</button>
+        </form>
+        <button class="back-button" onclick="window.history.back()">Cancelar</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Todos los derechos reservados</p>
+    </footer>
+
+</body>
+</html>

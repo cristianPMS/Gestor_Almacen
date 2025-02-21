@@ -1,0 +1,46 @@
+--------------para limpiar las tablas y dejarlas con el id en limpio, hay que seguir los siguients pasos.-------
+
+-----------primero tenemos que limpiar las tablas de ingresar y extraer. Solo hay que hacerle un TRUNCATE---------------
+ 
+ TRUNCATE TABLE material_extraido;
+ TRUNCATE TABLE material_ingresado;
+
+--------------para las tablas de materiales y trabajadores, primero hay que quitar las llaves primarias de--------------
+--------------------las tablas de material_ingresado y material_extraido.-------------------------------------
+
+
+  ALTER TABLE material_extraido DROP FOREIGN KEY material_extraido_ibfk_2;
+  ALTER TABLE material_ingresado DROP FOREIGN KEY material_ingresado_ibfk_2;
+
+-------------------------------una ves hecho eso, podremos limpiar la tabla de trabajadores.-------------------
+
+  TRUNCATE TABLE trabajadores;
+
+-----------------Una ves hecho la limpieza de trabajadores, hay que restaurar esas llaves primarias:--------------------
+
+ ALTER TABLE material_ingresado
+ ADD CONSTRAINT material_ingresado_ibfk_2
+ FOREIGN KEY (id_trabajador) REFERENCES trabajadores(id);
+
+ ALTER TABLE material_extraido
+ ADD CONSTRAINT material_extraido_ibfk_2
+ FOREIGN KEY (id_trabajador) REFERENCES trabajadores(id);
+
+
+---------------------para limpiar la tabla de materiales hay que seguir los mismos pasos:-----------------------
+ 
+----------------------- primero hay que quitar las llaves foraneas:---------------------------------
+
+ ALTER TABLE material_extraido DROP FOREIGN KEY material_extraido_ibfk_1;
+ ALTER TABLE material_ingresado DROP FOREIGN KEY material_ingresado_ibfk_1;
+
+ ------------------------luego hacemos un truncade a materiales--------------------------------------------
+ TRUNCATE TABLE materiales;
+
+-----------------por ultimo devolvemos las llaves primarias;--------------------------------------------
+
+ALTER TABLE material_ingresado
+ADD CONSTRAINT material_ingresado_ibfk_1 FOREIGN KEY (id_material) REFERENCES materiales(id);
+
+ALTER TABLE material_extraido
+ADD CONSTRAINT material_extraido_ibfk_1 FOREIGN KEY (id_material) REFERENCES materiales(id);

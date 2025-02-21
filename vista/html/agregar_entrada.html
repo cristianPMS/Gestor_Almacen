@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Almacén</title>
+    <link rel="stylesheet" href="../css/agregar.css">
+</head>
+<body>
+
+    <header>
+        <h1>Entrada de Herramienta o Material</h1>
+    </header>
+
+    <div class="form-container">
+        <h2>Nuevo Registro</h2>
+        <form action="/guardar_registro" method="POST">
+            <div class="input-group">
+                <label for="nombre">Material o Herramienta:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+
+            <div class="input-group">
+                <label for="trabajador">Trabajador responsable:</label>
+                <input type="text" id="trabajador" name="trabajador" required>
+            </div>
+
+            <div class="input-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" min="1" required>
+            </div>
+
+            <div class="input-group">
+                <label for="hora">Hora en la que fue agregada:</label>
+                <input type="datetime-local" id="hora" name="hora" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Registrar Producto</button>
+        </form>
+
+        <button class="back-button" onclick="window.history.back()">Cancelar</button>
+    </div>
+
+</body>
+</html>
