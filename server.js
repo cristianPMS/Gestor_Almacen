@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 
 //----------------- Archivos importados ---------------------------
 const principalController = require('./router/principalRouter.js');
@@ -15,6 +17,7 @@ const usuarios =require('./router/usuarioRouter.js');
 //----------------- Configuración de Middleware -------------------
 app.use(bodyParser.json()); // Parsear el cuerpo de las solicitudes JSON
 app.use(express.static(path.join(__dirname, 'vista'))); // Servir archivos estaticos (CSS, JS, etc.)
+app.use(cors());
 
 //------------------ Rutas (Controladores) -----------------------
 // Menu principal
