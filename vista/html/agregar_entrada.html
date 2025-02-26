@@ -14,32 +14,37 @@
 
     <div class="form-container">
         <h2>Nuevo Registro</h2>
-        <form action="/guardar_registro" method="POST">
+        <form   id="formRegistrarEntrada"  action="/guardar_registro" method="POST">
             <div class="input-group">
-                <label for="nombre">Material o Herramienta:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <label for="material">Material o Herramienta:</label>
+                <select id="material" name="material" required>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
             </div>
-
+    
             <div class="input-group">
                 <label for="trabajador">Trabajador responsable:</label>
-                <input type="text" id="trabajador" name="trabajador" required>
+                <select id="trabajador" name="trabajador" required>
+                    <!-- Las opciones se llenarán dinámicamente con JavaScript -->
+                </select>
             </div>
-
+    
             <div class="input-group">
                 <label for="cantidad">Cantidad:</label>
                 <input type="number" id="cantidad" name="cantidad" min="1" required>
             </div>
-
+    
             <div class="input-group">
-                <label for="hora">Hora en la que fue agregada:</label>
+                <label for="hora">Fecha y hora de entrada:</label>
                 <input type="datetime-local" id="hora" name="hora" required>
             </div>
-
-            <button type="submit" class="submit-btn">Registrar Producto</button>
+    
+            <button type="submit" class="submit-btn">Registrar entrada</button>
         </form>
-
+    
         <button class="back-button" onclick="window.history.back()">Cancelar</button>
-    </div>
+    </div> 
+     <script src="../js/registroEntrada.js"></script>
 
 </body>
 </html>

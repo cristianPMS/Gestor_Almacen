@@ -14,8 +14,8 @@ document.getElementById('login').addEventListener('submit', async function (e) {
         })
         const data = await response.json()
         if(response.ok){
-            alert('login exitoso');
-            window.location.replace('../html/index.html')
+            
+            window.location.replace('/index')
         }else{
             alert(data.message);
         }

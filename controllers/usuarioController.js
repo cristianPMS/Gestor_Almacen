@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
         const [rows] = await db.execute("SELECT * FROM usuarios WHERE usuario = ?", [usuario]);
 
         if (rows.length === 0) {
-            return res.status(404).json({ message: "Credenciales inválidas" });
+            return res.status(404).json({ message: "El usuario no está registrado en el sistema. Por favor, solicite a un administrador su alta." });
         }
 
         const user = rows[0]; // El primer usuario que coincida
@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
         if (compare) {
             res.json({ message: "Login exitoso", usuario: user.usuario, rol: user.rol });
         } else {
-            return res.status(401).json({ message: "Credenciales inválidas" });
+            return res.status(401).json({ message: "Usuario o contraseña incorrecta" });
         }
     } catch (error) {
         res.status(500).json({ message: error.message });

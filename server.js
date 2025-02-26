@@ -48,6 +48,10 @@ app.get('/index', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'index.html'));
 });
 
+app.get('/modificarIndex', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vista', 'html', 'editarIndex.html'));
+})
+
 app.get('/entrada', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'entrada.html'));
 });
@@ -55,6 +59,11 @@ app.get('/entrada', (req, res) => {
 app.get('/salida', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'salida.html'));
 });
+
+app.get('/editarSalida', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vista', 'html', 'editarSalida.html'));
+});
+
 
 app.get('/agregar_entrada', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'agregar_entrada.html'));
@@ -72,9 +81,19 @@ app.get('/usuarios', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'usuarios.html'));
 });
 
+app.get('/editarUsuario', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vista', 'html', 'editarUsuario.html'));
+});
+
+
 app.get('/trabajadores', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'trabajadores.html'));
 });
+
+app.get('/editarTrabajador', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vista', 'html', 'editarTrabajador.html'));
+});
+
 
 app.get('/registerTrabajador', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'registerTrabajador.html'));

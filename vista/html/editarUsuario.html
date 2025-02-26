@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Material</title>
+    <link rel="stylesheet" href="../css/formulario.css">
+</head>
+<body>
+
+    <header>
+        <h1>Editar un Usuario</h1>
+    </header>
+
+    <div class="form-container">
+        <h2>Actualizar Usuario</h2>
+        <form id="formEditar">
+            <div class="input-group">
+                <label for="usuario">Nombre de usuario:</label>
+                <input type="text" id="usuario" name="usuario" required>
+            </div>
+        
+            <div class="input-group">
+                <label for="password">Contraseña nueva:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+        
+            <div class="input-group">
+                <label for="rol">Rol:</label>
+                <select id="rol" name="rol" required>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Usuario">Usuario</option>
+                </select>
+            </div>
+        
+            <button onclick="window.location.href='/usuarios'"  type="submit" class="submit-btn">Actualizar</button>
+        </form>
+        
+        <button onclick="window.history.back();" class="back-button">Volver</button>
+        
+        <script src="../js/usuarios.js" defer></script>
+    </div>
+
+</body>
+</html>

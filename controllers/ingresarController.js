@@ -2,18 +2,36 @@ const db = require('../models/database.js');
 
 // Mostrar registros de la tabla
 exports.mostrar = async (req, res) => {
-    const query = 'SELECT * FROM `material_ingresado`;';
     try {
+        // Realiza una consulta para obtener los datos de la tabla `material_extraido`
+        // Uniendo las tablas `materiales` y `trabajadores` para obtener los nombres
+        const query = `
+            SELECT 
+                me.id, 
+                m.nombre_material, 
+                t.nombre, 
+                me.cantidad_ingresada, 
+                me.fecha_ingreso
+            FROM 
+                material_ingresado me
+            JOIN 
+                materiales m ON me.id_material = m.id
+            JOIN 
+                trabajadores t ON me.id_trabajador = t.id;
+        `;
+        
         const [results] = await db.query(query);
+        
         if (results.length > 0) {
             res.json({ message: 'Datos obtenidos', data: results });
         } else {
             res.json({ message: 'Sin datos', data: [] });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Error al obtener los datos', error: error.message });
+    } catch (err) {
+        res.status(500).json({ message: 'Error al obtener datos', error: err.message });
     }
 };
+
 
 // Agregar datos
 exports.agregar = async (req, res) => {

@@ -14,27 +14,28 @@
 
     <div class="form-container">
         <h2>Registro</h2>
-        <form action="#" method="POST">
+        <form   id="formAgregar"  method="POST">
             
             <div class="input-group">
                 <label for="username">Usuario</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="usuario" name="usuario" required>
             </div>
             <div class="input-group">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="input-group">
-                <label for="role">Rol</label>
-                <select id="role" name="role" required>
-                    <option value="admin">Administrador</option>
-                    <option value="user">Usuario</option>
+                <label for="rol">Rol</label>
+                <select id="rol" name="rol" required>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Usuario">Usuario</option>
                 </select>
             </div>
-            <button  onclick="window.location.href='/usuarios'"  type="submit" class="submit-btn">Registrar</button>
+            <button type="submit" class="submit-btn">Registrar</button>
         </form>
         <button class="back-button" onclick="window.history.back()">Cancelar</button>
     </div>
+    <script src="../js/usuarios.js" defer></script>
 
     <footer>
         <p>&copy; 2025 Todos los derechos reservados</p>
