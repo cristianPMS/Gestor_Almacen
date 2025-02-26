@@ -56,6 +56,10 @@ app.get('/entrada', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'entrada.html'));
 });
 
+app.get('/editarEntrada', (req, res) => {
+    res.sendFile(path.join(__dirname, 'vista', 'html', 'editarEntrada.html'));
+});
+
 app.get('/salida', (req, res) => {
     res.sendFile(path.join(__dirname, 'vista', 'html', 'salida.html'));
 });

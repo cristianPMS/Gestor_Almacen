@@ -220,12 +220,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
-
-
-
-
-
-
 //---------------------------------Eliminar un registro----------------------------------------------
 
 

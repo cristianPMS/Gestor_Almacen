@@ -63,13 +63,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 return;
             }
 
-            const datosSalida = { id_material, id_trabajador, cantidad_ingresada, fecha_ingreso };
+            const datosEntrada = { id_material, id_trabajador, cantidad_ingresada, fecha_ingreso };
 
             try {
                 const response = await fetch("http://localhost:4000/ingresar/ingresar", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(datosSalida)
+                    body: JSON.stringify(datosEntrada)
                 });
 
                 const data = await response.json();
@@ -137,6 +137,94 @@ async function cargarTrabajadores() {
     }
 }
 
+//--------------------------------------Editar salida----------------------------------------------
+// Función para almacenar un registro en localStorage y redirigir a la edición
+function editarRegistro(id, nombre_material, id_trabajador, cantidad_ingresada, fecha_ingreso) {
+    const registroEntrada = {
+        id,
+        nombre_material,  // Aquí almacenas el nombre del material (solo para mostrar en el formulario)
+        id_trabajador,   // Aquí almacenas el ID del trabajador
+        cantidad_ingresada,
+        fecha_ingreso
+    };
+
+    // Guardar los datos en localStorage con la clave 'registro_salida_editar'
+    localStorage.setItem('registro_entrada_editar', JSON.stringify(registroEntrada));
+
+    // Redirigir al formulario de edición
+    window.location.href = '/editarEntrada';
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const editarData = JSON.parse(localStorage.getItem('registro_entrada_editar'));
+
+    if (editarData) {
+        // Asignar valores a los campos del formulario
+        document.getElementById('cantidad').value = editarData.cantidad_ingresada;
+        document.getElementById('hora').value = editarData.fecha_ingreso.replace(" ", "T");
+
+        // Esperar a que se carguen los materiales y trabajadores antes de asignar valores
+        await cargarMateriales();
+        await cargarTrabajadores();
+
+        // Asignar los valores correctos a los campos del formulario
+        document.getElementById('material').value = editarData.id_material;  // Usar el ID del material
+        document.getElementById('trabajador').value = editarData.id_trabajador;  // Usar el ID del trabajador
+    }
+
+    // Evento para actualizar el registro
+    document.getElementById('formEditarEntrada').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        // Obtener los valores del formulario
+        const id_material = document.getElementById('material').value.trim();  // Obtener el ID del material
+        const id_trabajador = document.getElementById('trabajador').value.trim();  // Obtener el ID del trabajador
+        const cantidad = document.getElementById('cantidad').value.trim();
+        const hora = document.getElementById('hora').value.trim();
+
+        console.log('ID del material:', id_material);  // Verificar el ID del material
+        console.log('ID del trabajador:', id_trabajador);  // Verificar el ID del trabajador
+        console.log('Cantidad ingresada:', cantidad);
+        console.log('Fecha de ingreso:', hora);
+
+        if (!id_material || !id_trabajador || !cantidad || !hora) {
+            alert('Todos los campos son obligatorios.');
+            return;
+        }
+
+        // Crear el objeto con los datos actualizados
+        const EntradaActualizada = {
+            id: editarData.id,
+            id_material: parseInt(id_material, 10),  // Enviar el ID del material
+            id_trabajador: parseInt(id_trabajador, 10),  // Enviar el ID del trabajador
+            cantidad_ingresada: parseInt(cantidad, 10),
+            fecha_ingreso: hora
+        };
+
+        // Hacer la petición de actualización
+        try {
+            const response = await fetch(`http://localhost:4000/ingresar/actualizar/${editarData.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(EntradaActualizada)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                alert('Registro de salida actualizado correctamente.');
+                localStorage.removeItem('registro_entrada_editar');
+                window.location.href = '/entrada';
+            } else {
+                alert(`Error: ${result.message}`);
+            }
+        } catch (error) {
+            console.error('Error al actualizar el registro de salida:', error);
+        }
+    });
+});
 
 
 

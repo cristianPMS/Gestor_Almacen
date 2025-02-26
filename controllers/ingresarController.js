@@ -35,32 +35,69 @@ exports.mostrar = async (req, res) => {
 
 // Agregar datos
 exports.agregar = async (req, res) => {
-    const { id_material, id_trabajador, cantidad_ingresada, fecha_ingreso } = req.body;
-    const query = 'INSERT INTO `material_ingresado` (`id_material`, `id_trabajador`, `cantidad_ingresada`, `fecha_ingreso`) VALUES (?, ?, ?, ?);';
-    
     try {
+        const { id_material, id_trabajador, cantidad_ingresada, fecha_ingreso } = req.body;
+        
+        // Validación básica
+        if (!id_material || !id_trabajador || !cantidad_ingresada || !fecha_ingreso) {
+            return res.status(400).json({ message: 'Todos los campos son obligatorios.' });
+        }
+
+        const query = 'INSERT INTO `material_ingresado` (`id_material`, `id_trabajador`, `cantidad_ingresada`, `fecha_ingreso`) VALUES (?, ?, ?, ?);';
+        
         const [results] = await db.query(query, [id_material, id_trabajador, cantidad_ingresada, fecha_ingreso]);
-        res.json({ message: 'Registrado con éxito', data: results });
-    } catch (error) {
-        res.status(500).json({ message: 'Error al registrar datos', error: error.message });
+
+        // Retornar el ID del nuevo registro
+        res.status(201).json({ message: 'Registrado con éxito', data: { id: results.insertId } });
+    } catch (err) {
+        res.status(500).json({ message: 'Lo siento, no hay suficienten en el inventario ', error: err.message });
     }
 };
 
 // Actualizar registro
 exports.actualizar = async (req, res) => {
-    const { id_material, id_trabajador, cantidad_ingresada, fecha_ingreso } = req.body;
-    const { id } = req.params;
-    const query = 'UPDATE material_ingresado SET id_material=?, id_trabajador=?, cantidad_ingresada=?, fecha_ingreso=? WHERE id=?';
-
     try {
+        const { id_material, id_trabajador, cantidad_ingresada, fecha_ingreso } = req.body;  // Recibir IDs directamente
+        const { id } = req.params;
+
+        console.log("Datos recibidos en el backend:");
+        console.log("ID del registro a actualizar:", id);
+        console.log("ID del material:", id_material);
+        console.log("ID del trabajador:", id_trabajador);
+        console.log("Cantidad extraída:", cantidad_ingresada);
+        console.log("Fecha de extracción:", fecha_ingreso);
+
+        // Validar que los IDs existan en la base de datos (opcional)
+        const [materialResult] = await db.query('SELECT id FROM materiales WHERE id = ?', [id_material]);
+        if (materialResult.length === 0) {
+            console.log("Material no encontrado en la base de datos.");
+            return res.status(404).json({ message: 'Material no encontrado' });
+        }
+
+        const [trabajadorResult] = await db.query('SELECT id FROM trabajadores WHERE id = ?', [id_trabajador]);
+        if (trabajadorResult.length === 0) {
+            console.log("Trabajador no encontrado en la base de datos.");
+            return res.status(404).json({ message: 'Trabajador no encontrado' });
+        }
+
+        // Realizar la actualización
+        const query = `
+            UPDATE material_ingresado 
+            SET id_material = ?, id_trabajador = ?, cantidad_ingresada = ?, fecha_ingreso = ? 
+            WHERE id = ?;
+        `;
         const [results] = await db.query(query, [id_material, id_trabajador, cantidad_ingresada, fecha_ingreso, id]);
+
+        console.log("Resultado de la actualización:", results);
+
         if (results.affectedRows > 0) {
-            res.json({ message: 'Registro actualizado con éxito' });
+            res.json({ message: 'Registro actualizado exitosamente' });
         } else {
             res.status(404).json({ message: 'Registro no encontrado' });
         }
-    } catch (error) {
-        res.status(500).json({ message: 'Error al actualizar el registro', error: error.message });
+    } catch (err) {
+        console.error("Error en la actualización:", err);
+        res.status(500).json({ message: 'Error al actualizar el registro', error: err.message });
     }
 };
 
