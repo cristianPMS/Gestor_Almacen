@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const result = await response.json();
 
             if (response.ok) {
-                alert('Material actualizado correctamente.');
+                alert('Registro actualizado correctamente.');
                 localStorage.removeItem('material_editar'); // Limpiar los datos del localStorage
                 window.location.href = '/index'; // Redirigir a la página de mostrar
             } else {
