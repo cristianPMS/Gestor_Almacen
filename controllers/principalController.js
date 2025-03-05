@@ -58,7 +58,7 @@ exports.actualizar = async (req, res) => {
             return res.status(404).json({ message: 'Registro no encontrado' });
         }
     } catch (err) {
-        res.status(500).json({ message: 'Error al intentar actualizar el registro', error: err.message });
+        res.status(500).json({ message: 'Este Nombre ya esta ocupado', error: err.message });
     }
 };
 

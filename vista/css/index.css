@@ -7,23 +7,36 @@
 
 body {
     font-family: Arial, sans-serif;
+    background: url('../img/login.jpg') no-repeat center center fixed;
     background-color: #f4f4f9;
     color: #333;
 }
 
+/* Header fijo */
 header {
     background-color: #007BFF;
     color: white;
     padding: 20px;
     text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Para que quede por encima de otros elementos */
 }
 
 header h1 {
     font-size: 2rem;
 }
 
+/* Navbar fijo */
 nav {
     background-color: #333;
+    position: fixed;
+    top: 70px; /* Ajuste para que quede debajo del header */
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }
 
 nav ul {
@@ -31,6 +44,7 @@ nav ul {
     display: flex;
     justify-content: center;
     padding: 10px;
+    margin: 0;
 }
 
 nav ul li {
@@ -47,11 +61,13 @@ nav ul li a:hover {
     text-decoration: underline;
 }
 
+/* Ajuste para evitar que el contenido quede oculto detrás del header y nav */
 main {
     padding: 20px;
-    margin-top: 20px;
+    margin-top: 120px; 
 }
 
+/* Contenedor de la lista de productos */
 .product-list {
     background-color: white;
     border-radius: 5px;
@@ -59,28 +75,31 @@ main {
     padding: 20px;
 }
 
+/* Centrar el título h2 */
 .product-list h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
+    text-align: center; /* Agregado para centrar el texto */
 }
 
+/* Tabla */
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
+/* Estilos para las celdas de la tabla */
 table th, table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
 }
 
+/* Encabezado de la tabla (SIN posición sticky) */
 table th {
     background-color: #007BFF;
     color: white;
 }
 
+/* Botones */
 button {
     padding: 5px 10px;
     margin: 5px;
@@ -103,23 +122,7 @@ button:hover {
     opacity: 0.8;
 }
 
-.add-product {
-    margin-top: 20px;
-    text-align: center;
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #333;
-    color: white;
-    margin-top: 20px;
-}
-
-footer p {
-    font-size: 0.9rem;
-}
-
+/* Contenedor del botón agregar */
 .button-container {
     text-align: center;
     margin: 20px 0;
@@ -140,3 +143,30 @@ footer p {
     background-color: #12c73a;
 }
 
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 20px;
+}
+
+footer p {
+    font-size: 0.9rem;
+}
+
+/* Barra de búsqueda */
+.search-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#search {
+    padding: 10px;
+    width: 80%;
+    max-width: 400px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
