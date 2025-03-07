@@ -1,3 +1,4 @@
 node_modules
 
+# Información sensible
 .env
