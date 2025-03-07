@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../css/entrada.css"> 
 </head>
 <body>
-    
     <header>
         <h1>Gestor de Almacén SYATEC</h1>
     </header>
@@ -20,27 +19,24 @@
     </nav>
     <main>
         <section class="product-list2">
-            <h2>registro de salida  </h2>
+            <h2>REGISTRO DE SALIDA</h2>
             <table>
-                <thead>
+                <thead> 
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Trabajador</th>
-                        <th>Cantidad</th>
-                        <th>Fecha</th>  
+                        <th id="th-id">ID <span class="sort-arrow">▲</span></th>
+                        <th id="th-nombre">Nombre <span class="sort-arrow">▲</span></th>
+                        <th id="th-trabajador">Trabajador <span class="sort-arrow">▲</span></th>
+                        <th id="th-cantidad">Cantidad <span class="sort-arrow">▲</span></th>
+                        <th id="th-fecha">Fecha </th>
                         <th>Accion</th>
-                       
                     </tr>
                 </thead>
-                <tbody  id="mostrar">
-                
-                
+                <tbody id="mostrar">
+                    <!-- Los registros se cargarán aquí dinámicamente -->
                 </tbody>
             </table>
         </section>
     </main>
     <script src="../js/registroSalida.js"></script>
-   
 </body>
 </html>

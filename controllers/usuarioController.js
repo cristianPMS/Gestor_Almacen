@@ -1,6 +1,10 @@
 // controllers/usuariosController.js
 const bcrypt = require('bcrypt');
 const db = require('../models/database.js');
+const jwt = require ('jsonwebtoken');
+require("dotenv").config();
+
+
 
 //mostrar
 exports.mostrar = async (req, res) => {
@@ -42,7 +46,7 @@ exports.register = async (req, res) => {
     }
 };
 
-// Login de usuario
+// Login de usuario con JWT y Cookies
 exports.login = async (req, res) => {
     try {
         const { usuario, password } = req.body;
@@ -51,19 +55,35 @@ exports.login = async (req, res) => {
         const [rows] = await db.execute("SELECT * FROM usuarios WHERE usuario = ?", [usuario]);
 
         if (rows.length === 0) {
-            return res.status(404).json({ message: "El usuario no está registrado en el sistema. Por favor, solicite a un administrador su alta." });
+            return res.status(404).json({ message: "Usuario o Contraseña incorrectas" });
         }
 
-        const user = rows[0]; // El primer usuario que coincida
+        const user = rows[0]; // Obtener el usuario encontrado
 
         // Comparar la contraseña ingresada con la almacenada en la BD
         const compare = await bcrypt.compare(password, user.password);
 
-        if (compare) {
-            res.json({ message: "Login exitoso", usuario: user.usuario, rol: user.rol });
-        } else {
+        if (!compare) {
             return res.status(401).json({ message: "Usuario o contraseña incorrecta" });
         }
+
+        // Generar Token JWT
+        const token = jwt.sign(
+            { id: user.id, usuario: user.usuario, rol: user.rol }, // Payload
+            process.env.SECRET_KEY, // Clave secreta (guardar en .env)
+            { expiresIn: "2h" } // Expiración del token
+        );
+
+        // Configurar la cookie con el token
+        res.cookie("token", token, {
+            httpOnly: true,  // Evita accesos desde JavaScript en el frontend
+            secure: false,  // Solo en HTTPS en producción
+            sameSite: "Lax",  // Protege contra ataques CSRF
+            maxAge: 2 * 60 * 60 * 1000,  // 2 horas en milisegundos
+        });
+
+        res.json({ message: "Login exitoso", usuario: user.usuario, rol: user.rol });
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -71,11 +91,17 @@ exports.login = async (req, res) => {
 
 //update 
 
-
 exports.actualizar = async (req, res) => { 
     try {
         const { usuario, password, rol } = req.body;
         const { id } = req.params;
+
+        // Verificar si ya existe otro usuario con el mismo nombre
+        const [existingUsers] = await db.execute("SELECT id FROM usuarios WHERE usuario = ? AND id != ?", [usuario, id]);
+
+        if (existingUsers.length > 0) {
+            return res.status(400).json({ message: "El nombre de usuario ya está en uso." });
+        }
 
         let query = `UPDATE usuarios SET usuario=?, rol=? WHERE id=?`;
         let values = [usuario, rol, id];

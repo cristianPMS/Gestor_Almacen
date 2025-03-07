@@ -2,11 +2,12 @@
 const express= require('express');
 const router = express.Router();
 const extraer= require('../controllers/extraeController.js');
+const { protegerRutas, verificarRol } = require('../middleware/protegerRutas.js');
 
-router.get('/visualizar',extraer.mostrarTable);
-router.post('/agregar',extraer.agregar);
-router.put('/actualizar/:id',extraer.editar);
-router.delete('/eliminar/:id',extraer.eliminar);
+router.get('/visualizar',protegerRutas,verificarRol('administrador'),extraer.mostrarTable);
+router.post('/agregar',protegerRutas,verificarRol('administrador'),extraer.agregar);
+router.put('/actualizar/:id',protegerRutas,verificarRol('administrador'),extraer.editar);
+router.delete('/eliminar/:id',protegerRutas,verificarRol('administrador'),extraer.eliminar);
 
 
 

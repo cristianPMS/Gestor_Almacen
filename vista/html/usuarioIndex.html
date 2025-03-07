@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Almacén</title>
+    <link rel="stylesheet" href="../css/index.css"> 
+</head>
+<body>
+    
+    <header>
+        <h1>Gestor de Almacén SYATEC</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="usuario/logout">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Buscar por nombre..." onkeyup="searchTable()">
+        </div>
+        <div>
+        <section class="product-list">
+            <h2>Herramientas y Materiales disponibles en Inventario</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th id="th-id">ID <span class="sort-arrow">▲</span></th>
+                        <th id="th-nombre">Nombre <span class="sort-arrow">▲</span></th>
+                        <th id="th-referencia">Referencia <span class="sort-arrow">▲</span></th>
+                        <th id="th-cantidad">Cantidad <span class="sort-arrow">▲</span></th>
+                        <th id="th-categoria">Categoría <span class="sort-arrow">▲</span></th>
+                    </tr>
+                </thead>
+                <tbody id="mostrar">  <!--  -->
+
+                </tbody>
+            </table>
+        </section>
+    </div>
+    </main>
+    <script>
+        function searchTable() {
+            const input = document.getElementById("search");
+            const filter = input.value.toUpperCase();
+            const table = document.querySelector("table");
+            const rows = table.getElementsByTagName("tr");
+
+            // Recorremos todas las filas de la tabla
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName("td");
+                const nameCell = cells[1]; // Asumiendo que el nombre está en la segunda columna (index 1)
+
+                if (nameCell) {
+                    const nameText = nameCell.textContent || nameCell.innerText;
+                    if (nameText.toUpperCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    <script  src="../js/usuarioIndex.js" defer></script>
+   
+</body>
+</html>

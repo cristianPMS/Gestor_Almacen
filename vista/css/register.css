@@ -8,6 +8,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
+    background: url('../img/login.jpg') no-repeat center center fixed;
     color: #333;
     height: 100vh;
     display: flex;
@@ -132,3 +133,12 @@ footer {
     background-color: #ff0019;
 }
 
+.edit-btn {
+    background-color: #FFC107;
+    color: white;
+}
+
+.delete-btn {
+    background-color: #DC3545;
+    color: white;
+}
