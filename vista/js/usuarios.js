@@ -15,8 +15,8 @@ async function cargarUsuarios() {
                 <td>${row.usuario}</td>
                 <td>${row.rol}</td>
                 <td>
-                        <button onclick="editarUsuario(${row.id}, '${row.usuario}', '${row.rol}')">Editar</button>
-                        <button onclick="eliminar(${row.id})">Eliminar</button>
+                        <button class="edit-btn" onclick="editarUsuario(${row.id}, '${row.usuario}', '${row.rol}')">Editar</button>
+                        <button class="delete-btn" onclick="eliminar(${row.id})">Eliminar</button>
                         <button onclick="location.reload()">Refrescar</button>
 
                 </td>

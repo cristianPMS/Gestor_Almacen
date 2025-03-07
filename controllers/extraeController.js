@@ -97,7 +97,7 @@ exports.editar = async (req, res) => {
         }
     } catch (err) {
         console.error("Error en la actualización:", err);
-        res.status(500).json({ message: 'Error al actualizar el registro', error: err.message });
+        res.status(500).json({ message: 'No hay suficiente en el inventario', error: err.message });
     }
 };
 

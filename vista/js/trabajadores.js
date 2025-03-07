@@ -15,8 +15,8 @@ async function cargarDatos() {
                 <td>${row.nombre}</td>
                 <td>${row.area}</td>
                 <td>
-                    <button onclick="editar(${row.id}, '${row.nombre}','${row.area}')" >Editar</button>
-                    <button onclick="eliminar(${row.id})" >Eliminar</button>
+                    <button class="edit-btn" onclick="editar(${row.id}, '${row.nombre}','${row.area}')" >Editar</button>
+                    <button class="delete-btn" onclick="eliminar(${row.id})" >Eliminar</button>
                 </td>
             `;
             tbody.appendChild(tr);

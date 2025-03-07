@@ -8,8 +8,11 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
+    background: url('../img/login.jpg') no-repeat center center fixed;
     color: #333;
 }
+
+
 
 header {
     background-color: #007BFF;
@@ -79,8 +82,26 @@ table th, table td {
 table th {
     background-color: #007BFF;
     color: white;
+    cursor: pointer;
+    position: relative;
 }
 
+table th .sort-arrow {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+table th.asc .sort-arrow {
+    transform: rotate(180deg);
+}
+
+table th.desc .sort-arrow {
+    transform: rotate(0deg);
+}
+
+/* Botones */
 button {
     padding: 5px 10px;
     margin: 5px;
@@ -101,11 +122,6 @@ button {
 
 button:hover {
     opacity: 0.8;
-}
-
-.add-product {
-    margin-top: 20px;
-    text-align: center;
 }
 
 footer {

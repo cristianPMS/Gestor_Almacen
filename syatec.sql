@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-02-2025 a las 19:47:58
+-- Tiempo de generación: 06-03-2025 a las 22:21:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -34,13 +34,6 @@ CREATE TABLE `materiales` (
   `cantidad` int(11) NOT NULL CHECK (`cantidad` >= 0),
   `categoria` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `materiales`
---
-
-INSERT INTO `materiales` (`id`, `nombre_material`, `identificador`, `cantidad`, `categoria`) VALUES
-(2, 'Matillos', 'fila 3', 5, 'herramienta');
 
 -- --------------------------------------------------------
 
@@ -187,7 +180,7 @@ CREATE TABLE `trabajadores` (
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
-  `usuario` varchar(30) NOT NULL,
+  `usuario` varchar(15) NOT NULL,
   `password` varchar(150) NOT NULL,
   `rol` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -197,8 +190,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `usuario`, `password`, `rol`) VALUES
-(2, 'cristian', '$2b$10$Js74CBXDpo1aTBFi.yACt.CKUFPIhFkDwdM8Z2AEM0f2mBwqi43wG', 'Administrador'),
-(3, 'Daniel', '$2b$10$4i/X.yOvQTtZCUTZ65dV4.Ww3e7p23VjyfqIGR/HAkKZp00WcPSRu', 'Campo');
+(1, 'admin', '$2b$10$dxfpX91h40eA0jBgwu4SuOyqu.cLlo7ajx3RS7yAC65By5q8bmUH6', 'administrador');
 
 --
 -- Índices para tablas volcadas
@@ -247,31 +239,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `materiales`
 --
 ALTER TABLE `materiales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `material_extraido`
 --
 ALTER TABLE `material_extraido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `material_ingresado`
 --
 ALTER TABLE `material_ingresado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas

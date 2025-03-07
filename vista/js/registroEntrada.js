@@ -6,13 +6,13 @@ async function cargarDatos() {
     try {
         const response = await fetch('http://localhost:4000/ingresar/mostrar');
         const data = await response.json();
-        const tbody = document.getElementById('mostrar'); // Asegúrate de que el ID coincide con el tbody de la tabla
-        tbody.innerHTML = ''; // Limpiar la tabla antes de volver a llenarla
+        const tbody = document.getElementById('mostrar'); 
+        tbody.innerHTML = ''; // Limpiar la tabla antes de llenarla
 
         data.data.forEach(row => {
             const tr = document.createElement('tr');
 
-            // Convertir la fecha a un formato legible
+            // Formatear la fecha
             const fechaFormateada = new Date(row.fecha_ingreso).toLocaleString('es-MX', {
                 timeZone: 'America/Mexico_City',
                 year: 'numeric',
@@ -30,16 +30,59 @@ async function cargarDatos() {
                 <td>${row.cantidad_ingresada}</td>
                 <td>${fechaFormateada}</td>
                 <td>
-                    <button onclick="editarRegistro(${row.id}, '${row.nombre_material}', '${row.nombre}', '${row.cantidad_ingresada}', '${row.fecha_ingreso}')">Editar</button>
-                    <button onclick="eliminar(${row.id})">Eliminar</button>
-                </td> `;
+                    <button class="edit-btn" onclick="editarRegistro(${row.id}, '${row.nombre_material}', '${row.nombre}', '${row.cantidad_ingresada}', '${row.fecha_ingreso}')">Editar</button>
+                    <button class="delete-btn" onclick="eliminar(${row.id})">Eliminar</button>
+                </td>`;
             tbody.appendChild(tr);
         });
+
+        // Agregar funcionalidad de ordenamiento
+        agregarOrdenamiento();
     } catch (error) {
         console.log("Error al cargar la tabla ", error);
     }
 }
 
+//---------------------- Funcionalidad de ordenamiento ------------------------
+function agregarOrdenamiento() {
+    const table = document.querySelector("table");
+    const thElements = table.querySelectorAll("thead th");
+    const tbody = table.querySelector("tbody");
+
+    thElements.forEach((th, index) => {
+        if (index < 5) { // Agregar ordenamiento a las primeras 5 columnas (ID, Nombre, Trabajador, Cantidad, Fecha)
+            th.addEventListener("click", () => {
+                sortTable(index);
+            });
+        }
+    });
+
+    function sortTable(columnIndex) {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const isAscending = thElements[columnIndex].classList.toggle("asc");
+
+        rows.sort((a, b) => {
+            const aValue = a.cells[columnIndex].textContent.trim();
+            const bValue = b.cells[columnIndex].textContent.trim();
+
+            if (columnIndex === 0 || columnIndex === 3) { // ID y Cantidad (números)
+                return isAscending ? aValue - bValue : bValue - aValue;
+            } else if (columnIndex === 4) { // Fecha
+                return isAscending ? new Date(aValue) - new Date(bValue) : new Date(bValue) - new Date(aValue);
+            } else { // Nombre y Trabajador (texto)
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            }
+        });
+
+        // Limpiar y reinsertar filas ordenadas
+        tbody.innerHTML = "";
+        rows.forEach(row => tbody.appendChild(row));
+
+        // Actualizar flechas de ordenamiento
+        thElements.forEach(th => th.classList.remove("asc", "desc"));
+        thElements[columnIndex].classList.add(isAscending ? "asc" : "desc");
+    }
+}
 
 //----------------------------------------------------------------------------------------------------------------
 //-----------------------------------Agregar un registro----------------------------------------------------------
@@ -74,7 +117,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
                 const data = await response.json();
                 if (response.ok) {
-                    alert("Registro de salida exitoso.");
+                    alert("Registro de entrada exitoso.");
                     form.reset();
 
                     // Redirigir a la tabla principal y actualizar los datos
@@ -83,8 +126,8 @@ document.addEventListener("DOMContentLoaded", async function () {
                     alert(`Error: ${data.message}`);
                 }
             } catch (error) {
-                console.error("Error al registrar la salida:", error);
-                alert("Hubo un error al registrar la salida.");
+                console.error("Error al registrar la entrada:", error);
+                alert("Hubo un error al registrar la entrada.");
             }
         });
     }

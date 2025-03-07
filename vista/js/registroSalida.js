@@ -1,4 +1,5 @@
 console.log("conectado a front de registro de salida");
+
 //---------------------------Mostrar tabla-----------------------------
 async function cargarDatos() {
     try {
@@ -28,13 +29,57 @@ async function cargarDatos() {
                 <td>${row.cantidad_extraida}</td>
                 <td>${fechaFormateada}</td>
                 <td>
-                    <button onclick="editarRegistro(${row.id}, '${row.nombre_material}', '${row.nombre}', '${row.cantidad_extraida}', '${row.fecha_extraccion}')">Editar</button>
-                    <button onclick="eliminar(${row.id})">Eliminar</button>
-                </td> `;
+                    <button class="edit-btn" onclick="editarRegistro(${row.id}, '${row.nombre_material}', '${row.nombre}', '${row.cantidad_extraida}', '${row.fecha_extraccion}')">Editar</button>
+                    <button class="delete-btn" onclick="eliminar(${row.id})">Eliminar</button>
+                </td>`;
             tbody.appendChild(tr);
         });
+
+        // Agregar funcionalidad de ordenamiento
+        agregarOrdenamiento();
     } catch (error) {
         console.log("Error al cargar la tabla ", error);
+    }
+}
+
+//---------------------------Funcionalidad de ordenamiento-----------------------------
+function agregarOrdenamiento() {
+    const table = document.querySelector("table");
+    const thElements = table.querySelectorAll("thead th");
+    const tbody = table.querySelector("tbody");
+
+    thElements.forEach((th, index) => {
+        if (index < 5) { // Solo agregar ordenamiento a las primeras 5 columnas (ID, Nombre, Trabajador, Cantidad, Fecha)
+            th.addEventListener("click", () => {
+                sortTable(index);
+            });
+        }
+    });
+
+    function sortTable(columnIndex) {
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        const isAscending = thElements[columnIndex].classList.toggle("asc");
+
+        rows.sort((a, b) => {
+            const aValue = a.cells[columnIndex].textContent.trim();
+            const bValue = b.cells[columnIndex].textContent.trim();
+
+            if (columnIndex === 0 || columnIndex === 3) { // Columnas de ID y Cantidad (números)
+                return isAscending ? aValue - bValue : bValue - aValue;
+            } else if (columnIndex === 4) { // Columna de Fecha (formato YYYY-MM-DD)
+                return isAscending ? new Date(aValue) - new Date(bValue) : new Date(bValue) - new Date(aValue);
+            } else { // Otras columnas (texto)
+                return isAscending ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+            }
+        });
+
+        // Limpiar y reinsertar filas ordenadas
+        tbody.innerHTML = "";
+        rows.forEach(row => tbody.appendChild(row));
+
+        // Actualizar flechas de ordenamiento
+        thElements.forEach(th => th.classList.remove("asc", "desc"));
+        thElements[columnIndex].classList.add(isAscending ? "asc" : "desc");
     }
 }
 
@@ -130,6 +175,7 @@ async function cargarTrabajadores() {
         console.error("Error al cargar trabajadores:", error);
     }
 }
+
 //--------------------------------------Editar salida----------------------------------------------
 // Función para almacenar un registro en localStorage y redirigir a la edición
 function editarRegistro(id, nombre_material, id_trabajador, cantidad_extraida, fecha_extraccion) {
@@ -220,29 +266,24 @@ document.addEventListener("DOMContentLoaded", async function () {
 });
 
 
+
 //---------------------------------Eliminar un registro----------------------------------------------
-
-
 async function eliminar(id) {
-    if (!confirm("estas seguro de eliminar este registro?")) return;
+    if (!confirm("¿Estás seguro de eliminar este registro?")) return;
     try {
         const response = await fetch(`http://localhost:4000/extraer/eliminar/${id}`, {
             method: 'DELETE'
-        })
+        });
         if (response.ok) {
-            alert("registro eliminado correctamente");
-            cargarDatos()
+            alert("Registro eliminado correctamente.");
+            cargarDatos();
         } else {
-            alert("No se pudo eliminar, intentelo mas tarde");
+            alert("No se pudo eliminar, inténtelo más tarde.");
         }
     } catch (error) {
         console.error(error);
     }
 }
 
-
-
-
 // Llamar a la función al cargar la página
 document.addEventListener("DOMContentLoaded", cargarDatos);
-
