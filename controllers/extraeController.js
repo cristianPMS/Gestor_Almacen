@@ -97,7 +97,11 @@ exports.editar = async (req, res) => {
         }
     } catch (err) {
         console.error("Error en la actualización:", err);
+<<<<<<< HEAD
         res.status(500).json({ message: 'No hay suficiente en el inventario', error: err.message });
+=======
+        res.status(500).json({ message: 'No hay suficiente en el invetario', error: err.message });
+>>>>>>> eff72ca01c8e44830b903e595a550442ed3142de
     }
 };
 

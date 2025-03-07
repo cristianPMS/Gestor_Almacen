@@ -5,7 +5,10 @@ async function cargarDatos() {
         const data = await response.json();
         const tbody = document.getElementById('mostrar');
         tbody.innerHTML = '';
+<<<<<<< HEAD
 
+=======
+>>>>>>> eff72ca01c8e44830b903e595a550442ed3142de
         data.data.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -17,13 +20,17 @@ async function cargarDatos() {
             `;
             tbody.appendChild(tr);
         });
+<<<<<<< HEAD
 
         // Agregar funcionalidad de ordenamiento después de cargar los datos
         agregarOrdenamiento();
+=======
+>>>>>>> eff72ca01c8e44830b903e595a550442ed3142de
     } catch (error) {
         console.log("Error al cargar la tabla", error);
     }
 }
+<<<<<<< HEAD
 //---------------------------Funcionalidad de ordenamiento-----------------------------
 function agregarOrdenamiento() {
     const table = document.querySelector("table");
@@ -62,6 +69,8 @@ function agregarOrdenamiento() {
         thElements[columnIndex].classList.add(isAscending ? "asc" : "desc");
     }
 }
+=======
+>>>>>>> eff72ca01c8e44830b903e595a550442ed3142de
 
 // Llamar a la función al cargar la página
 document.addEventListener("DOMContentLoaded", cargarDatos);

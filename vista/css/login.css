@@ -6,7 +6,11 @@
 }
 body {
     font-family: Arial, sans-serif;
+<<<<<<< HEAD
     background: url('../img/login1.jpeg') no-repeat center center fixed;
+=======
+    background: url('../img/login.jpg') no-repeat center center fixed;
+>>>>>>> eff72ca01c8e44830b903e595a550442ed3142de
     background-size: cover;
     color: #333;
     height: 100vh;

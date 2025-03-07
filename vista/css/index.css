@@ -180,6 +180,7 @@ footer p {
     border-radius: 5px;
     border: 1px solid #ddd;
 }
+<<<<<<< HEAD
 table th {
     background-color: #007BFF;
     color: white;
@@ -202,3 +203,5 @@ table th.desc .sort-arrow {
     transform: rotate(0deg);
 }
 
+=======
+>>>>>>> eff72ca01c8e44830b903e595a550442ed3142de
