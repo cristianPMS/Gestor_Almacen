@@ -4,7 +4,7 @@ console.log("hay comunicacion con el front de entrada");
 //---------------------------Mostrar tabla-----------------------------
 async function cargarDatos() {
     try {
-        const response = await fetch('http://localhost:4000/ingresar/mostrar');
+        const response = await fetch('https://almacen-syatec.onrender.com/ingresar/mostrar');
         const data = await response.json();
         const tbody = document.getElementById('mostrar'); 
         tbody.innerHTML = ''; // Limpiar la tabla antes de llenarla
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             const datosEntrada = { id_material, id_trabajador, cantidad_ingresada, fecha_ingreso };
 
             try {
-                const response = await fetch("http://localhost:4000/ingresar/ingresar", {
+                const response = await fetch("https://almacen-syatec.onrender.com/ingresar/ingresar", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(datosEntrada)
@@ -142,7 +142,7 @@ async function cargarMateriales() {
     }
 
     try {
-        const response = await fetch("http://localhost:4000/principal/principal");
+        const response = await fetch("https://almacen-syatec.onrender.com/principal/principal");
         const data = await response.json();
         selectMaterial.innerHTML = '<option value="">Seleccione un material</option>';
 
@@ -165,7 +165,7 @@ async function cargarTrabajadores() {
     }
 
     try {
-        const response = await fetch("http://localhost:4000/trabajador/visualizar");
+        const response = await fetch("https://almacen-syatec.onrender.com/trabajador/visualizar");
         const data = await response.json();
         selectTrabajador.innerHTML = '<option value="">Seleccione un trabajador</option>';
 
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // Hacer la petición de actualización
         try {
-            const response = await fetch(`http://localhost:4000/ingresar/actualizar/${editarData.id}`, {
+            const response = await fetch(`https://almacen-syatec.onrender.com/ingresar/actualizar/${editarData.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 async function eliminar(id) {
     if (!confirm("estas seguro de eliminar este registro?")) return;
     try {
-        const response = await fetch(`http://localhost:4000/ingresar/eliminar/${id}`, {
+        const response = await fetch(`https://almacen-syatec.onrender.com/ingresar/eliminar/${id}`, {
             method: 'DELETE'
         })
         if (response.ok) {

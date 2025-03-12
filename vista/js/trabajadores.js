@@ -4,7 +4,7 @@ console.log("conectado a front de trabajadores");
 //----------------------------Mostrar datos---------------------------------------------------------
 async function cargarDatos() {
     try {
-        const response = await fetch('http://localhost:4000/trabajador/visualizar');
+        const response = await fetch('https://almacen-syatec.onrender.com/trabajador/visualizar');
         const data = await response.json();
         const tbody = document.getElementById('mostrar');
         tbody.innerHTML = '';
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             try {
-                const response = await fetch('http://localhost:4000/trabajador/insertar', {
+                const response = await fetch('https://almacen-syatec.onrender.com/trabajador/insertar', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         try {
-            const response = await fetch(`http://localhost:4000/trabajador/actualizar/${editarData.id}`, {
+            const response = await fetch(`https://almacen-syatec.onrender.com/trabajador/actualizar/${editarData.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function() {
 async function eliminar(id) {
     if (!confirm("¿Estás seguro de eliminar a este trabajador?")) return;
     try {
-        const response = await fetch(`http://localhost:4000/trabajador/eliminar/${id}`, {
+        const response = await fetch(`https://almacen-syatec.onrender.com/trabajador/eliminar/${id}`, {
             method: 'DELETE'
         })
         if (response.ok) {

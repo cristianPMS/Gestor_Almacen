@@ -3,7 +3,7 @@ console.log("conectado a front");
 //---------------------------Mostrar tabla-----------------------------
 async function cargarUsuarios() {
     try {
-        const response = await fetch('http://localhost:4000/usuario/mostrar');
+        const response = await fetch('https://almacen-syatec.onrender.com/usuario/mostrar');
         const data = await response.json();
         const tbody = document.getElementById('mostrar'); // Asegúrate de que el ID coincide con el tbody de la tabla
         tbody.innerHTML = ''; // Limpiar la tabla antes de volver a llenarla
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
 
             try {
-                const response = await fetch('http://localhost:4000/usuario/register', {
+                const response = await fetch('https://almacen-syatec.onrender.com/usuario/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
-            const response = await fetch(`http://localhost:4000/usuario/actualizar/${editarData.id}`, {
+            const response = await fetch(`https://almacen-syatec.onrender.com/usuario/actualizar/${editarData.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
 async function eliminar(id) {
     if (!confirm("¿Estás seguro de eliminar este registro?")) return;
     try {
-        const response = await fetch(`http://localhost:4000/usuario/eliminar/${id}`, {
+        const response = await fetch(`https://almacen-syatec.onrender.com/usuario/eliminar/${id}`, {
             method: 'DELETE'
         })
         if (response.ok) {

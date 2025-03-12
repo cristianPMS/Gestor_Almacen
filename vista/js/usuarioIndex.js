@@ -1,7 +1,7 @@
 //----------------------------Mostrar datos---------------------------------------------------------
 async function cargarDatos() {
     try {
-        const response = await fetch('http://localhost:4000/principal/usuario');
+        const response = await fetch('https://almacen-syatec.onrender.com/principal/usuario');
         const data = await response.json();
         const tbody = document.getElementById('mostrar');
         tbody.innerHTML = '';
