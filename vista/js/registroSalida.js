@@ -3,7 +3,7 @@ console.log("conectado a front de registro de salida");
 //---------------------------Mostrar tabla-----------------------------
 async function cargarDatos() {
     try {
-        const response = await fetch('https://almacen-syatec.onrender.com/extraer/visualizar');
+        const response = await fetch('https://almacen-syatec-3ifx.onrender.com/extraer/visualizar');
         const data = await response.json();
         const tbody = document.getElementById('mostrar'); // Asegúrate de que el ID coincide con el tbody de la tabla
         tbody.innerHTML = ''; // Limpiar la tabla antes de volver a llenarla
@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             const datosSalida = { id_material, id_trabajador, cantidad_extraida, fecha_extraccion };
 
             try {
-                const response = await fetch("https://almacen-syatec.onrender.com/extraer/agregar", {
+                const response = await fetch("https://almacen-syatec-3ifx.onrender.com/extraer/agregar", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(datosSalida)
@@ -138,7 +138,7 @@ async function cargarMateriales() {
     }
 
     try {
-        const response = await fetch("https://almacen-syatec.onrender.com/principal/principal");
+        const response = await fetch("https://almacen-syatec-3ifx.onrender.com/principal/principal");
         const data = await response.json();
         selectMaterial.innerHTML = '<option value="">Seleccione un material</option>';
 
@@ -161,7 +161,7 @@ async function cargarTrabajadores() {
     }
 
     try {
-        const response = await fetch("https://almacen-syatec.onrender.com/trabajador/visualizar");
+        const response = await fetch("https://almacen-syatec-3ifx.onrender.com/trabajador/visualizar");
         const data = await response.json();
         selectTrabajador.innerHTML = '<option value="">Seleccione un trabajador</option>';
 
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         // Hacer la petición de actualización
         try {
-            const response = await fetch(`https://almacen-syatec.onrender.com/extraer/actualizar/${editarData.id}`, {
+            const response = await fetch(`https://almacen-syatec-3ifx.onrender.com/extraer/actualizar/${editarData.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 async function eliminar(id) {
     if (!confirm("¿Estás seguro de eliminar este registro?")) return;
     try {
-        const response = await fetch(`https://almacen-syatec.onrender.com/extraer/eliminar/${id}`, {
+        const response = await fetch(`https://almacen-syatec-3ifx.onrender.com/extraer/eliminar/${id}`, {
             method: 'DELETE'
         });
         if (response.ok) {
